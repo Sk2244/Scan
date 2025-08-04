@@ -1,0 +1,166 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Secure Booster</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+    }.container {
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+h1 {
+  font-size: 2.5em;
+  margin-bottom: 10px;
+  color: #00e6ac;
+}
+
+p {
+  font-size: 1em;
+  color: #cfcfcf;
+}
+
+#scanBtn {
+  background-color: #00e6ac;
+  color: #0f2027;
+  padding: 15px 30px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 30px;
+  font-size: 1.2em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#scanBtn:hover {
+  background-color: #00b48f;
+}
+
+#result {
+  margin-top: 25px;
+  font-size: 1.1em;
+  color: #00ffcc;
+  display: none;
+}
+
+.junk-details {
+  margin-top: 10px;
+  font-size: 0.95em;
+  color: #b5f6ff;
+}
+
+.shield {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 20px;
+  background: url('https://cdn-icons-png.flaticon.com/512/3064/3064197.png') no-repeat center;
+  background-size: contain;
+  animation: pulse 2s infinite;
+}
+
+.rocket {
+  width: 80px;
+  height: 80px;
+  margin: 20px auto;
+  background: url('https://cdn-icons-png.flaticon.com/512/809/809957.png') no-repeat center;
+  background-size: contain;
+  animation: rocket-fly 1s ease-out forwards;
+  display: none;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.1); opacity: 0.8; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes rocket-fly {
+  0% { transform: translateY(0); opacity: 0; }
+  50% { transform: translateY(-30px); opacity: 0.8; }
+  100% { transform: translateY(-60px); opacity: 1; }
+}
+
+.scanning {
+  margin-top: 20px;
+  width: 100%;
+  height: 8px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 5px;
+  overflow: hidden;
+  display: none;
+}
+
+.scanning-bar {
+  height: 100%;
+  width: 0;
+  background: #00ffcc;
+  animation: scan-bar 3s linear forwards;
+}
+
+@keyframes scan-bar {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="shield" id="shieldIcon"></div>
+    <div class="rocket" id="rocketIcon"></div>
+    <h1>Secure Device Booster</h1>
+    <p>Scan your device to optimize performance and enhance stability.</p>
+    <button id="scanBtn">Scan and Make Your Device Fast</button>
+    <div class="scanning" id="scanAnim">
+      <div class="scanning-bar"></div>
+    </div>
+    <div id="result"></div>
+    <div class="junk-details" id="junkInfo"></div>
+  </div>  <script>
+    const scanBtn = document.getElementById('scanBtn');
+    const resultDiv = document.getElementById('result');
+    const scanAnim = document.getElementById('scanAnim');
+    const shieldIcon = document.getElementById('shieldIcon');
+    const rocketIcon = document.getElementById('rocketIcon');
+    const junkInfo = document.getElementById('junkInfo');
+
+    scanBtn.addEventListener('click', () => {
+      scanBtn.disabled = true;
+      scanBtn.innerText = 'Scanning...';
+      resultDiv.style.display = 'none';
+      scanAnim.style.display = 'block';
+      shieldIcon.style.display = 'block';
+      rocketIcon.style.display = 'none';
+      junkInfo.style.display = 'none';
+
+      setTimeout(() => {
+        scanBtn.innerText = 'Scan Complete';
+        resultDiv.style.display = 'block';
+        scanAnim.style.display = 'none';
+        shieldIcon.style.display = 'none';
+        rocketIcon.style.display = 'block';
+        resultDiv.innerHTML = '<strong>✅ Device optimized successfully!</strong><br>Your device performance has been boosted.';
+        junkInfo.style.display = 'block';
+        junkInfo.innerText = '🔄 Cleared 183MB of junk files and background tasks.';
+      }, 3000);
+    });
+  </script></body>
+</html>
